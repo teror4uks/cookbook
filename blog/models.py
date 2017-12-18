@@ -1,4 +1,4 @@
-from time import timezone
+from datetime import datetime
 
 from django.conf import settings
 from django.db import models
@@ -8,7 +8,7 @@ from django.db import models
 
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super().filter(draft=False).filter(publish__lte=timezone.now())
+        return super().filter(draft=False).filter(publish__lte=datetime.now())
 
 
 class Post(models.Model):
