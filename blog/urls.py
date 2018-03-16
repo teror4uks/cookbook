@@ -1,7 +1,13 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework import routers
+from .views import PostViewSet
 
-from .views import PostListView
+app_name = 'blog'
+
+router = routers.DefaultRouter()
+
+router.register('posts', PostViewSet, base_name='posts')
 
 urlpatterns = [
-    url(r'^posts/$', PostListView.as_view(), name='posts'),
+    url(r'^blog/', include(router.get_urls()))
 ]

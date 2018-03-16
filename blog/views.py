@@ -1,10 +1,9 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import ListView
-# Create your views here.
+from rest_framework import viewsets, mixins
 from .models import Post
+from .serializers import PostListSerializer, PostDetailSerializer
 
-
-class PostListView(ListView):
+class PostViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Post.objects.active()
+    serializer_class = PostListSerializer
+
 
