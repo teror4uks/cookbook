@@ -54,6 +54,10 @@ class User(AbstractBaseUser):
         return self.admin
 
     @property
+    def is_superuser(self):
+        return self.admin
+
+    @property
     def is_active(self):
         "Is the user active?"
         return self.active

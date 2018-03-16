@@ -24,3 +24,5 @@ src/templates/base.html
 .awcache/
 static/
 .DS_Store
+.vscode/
+

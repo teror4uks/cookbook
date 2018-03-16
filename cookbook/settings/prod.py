@@ -1,5 +1,4 @@
-from .settings import *
-
+from cookbook.settings.base import PROJECT_NAME
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
