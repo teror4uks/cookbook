@@ -94,7 +94,7 @@ class LinkedList:
 
 class PLinkedList:
     """
-    >>> from link_list import LinkedList
+    >>> from link_list import PLinkedList
     >>> pl = PLinkedList()
     >>> [pl.add(i) for i in range(10)]
     [None, None, None, None, None, None, None, None, None, None]
