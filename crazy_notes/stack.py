@@ -47,6 +47,60 @@ class Stack:
         return False
 
 
+def stack_reverse(s, s_len):
+    """
+    >>> from stack import stack_reverse
+    >>> s = 'hello'
+    >>> stack_reverse(s, len(s))
+    'olleh'
+    """
+    stack = Stack(s_len)
+    for i in s:
+        stack.push(i)
+    reverse_string = ''
+    while not stack.is_empty():
+        reverse_string += stack.pop()
+
+    return reverse_string
+
+
+def check_balance_parentheses(expression):
+    """
+    >>> from stack import check_balance_parentheses
+    >>> check_balance_parentheses('([)]')
+    False
+    >>> check_balance_parentheses(')[]')
+    False
+    >>> check_balance_parentheses('[{}({})]')
+    True
+    """
+    brakets_dict = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
+    }
+    rev_brakets_dict = {v: k for k, v in brakets_dict.items()}
+
+    stack = Stack(len(expression))
+    stack.push(expression[0])
+
+    for e in expression[1:]:
+        if e in brakets_dict.keys():
+            stack.push(e)
+        elif e in rev_brakets_dict.keys():
+            if stack.is_empty():
+                return False
+
+            open_braket_elem = rev_brakets_dict[e]
+
+            if stack.top() != open_braket_elem:
+                return False
+
+            stack.pop()
+
+    return stack.is_empty()
+
+
 if __name__ == '__main__':
     import doctest
-    doctest.testmod()
+    doctest.testmod(verbose=True)
