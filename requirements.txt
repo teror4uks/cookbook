@@ -1,4 +1,4 @@
-Django==2.0
+Django>=2.0.8
 olefile==0.44
 Pillow==4.3.0
 pkg-resources==0.0.0
