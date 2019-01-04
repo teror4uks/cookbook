@@ -1,9 +1,9 @@
 
 
-class Queue:
+class CQueue:
     """
-    >>> from crazy_notes.queue import Queue
-    >>> q = Queue()
+    >>> from crazy_notes.queue import CQueue
+    >>> q = CQueue()
     >>> q.is_empty()
     True
     >>> q.is_full()
