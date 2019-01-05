@@ -2,7 +2,7 @@
 
 class CQueue:
     """
-    >>> from crazy_notes.queue import CQueue
+    >>> from crazy_notes.tqueue import CQueue
     >>> q = CQueue()
     >>> q.is_empty()
     True
