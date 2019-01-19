@@ -363,34 +363,141 @@ class BinarySearchTree:
 
 
 def is_subtree_lesser(root, value):
+    """
+    >>> from crazy_notes.bst import BinarySearchTree, Node, is_subtree_lesser
+    >>> b = BinarySearchTree()
+    >>> b.insert(15)
+    True
+    >>> b.insert(14)
+    True
+    >>> b.insert(13)
+    True
+    >>> b.insert(12)
+    True
+    >>> b.insert(11)
+    True
+    >>> b.insert(10)
+    True
+    >>> is_subtree_lesser(b.root.left, b.root.data)
+    True
+    >>> nb = BinarySearchTree()
+    >>> node = Node(15)
+    >>> nb.root = node
+    >>> node = Node(14)
+    >>> nb.root.left = node
+    >>> node = Node(13)
+    >>> nb.root.left.left = node
+    >>> node = Node(20)
+    >>> nb.root.left.left
+    Data=13
+    >>> nb.root.left.left.left = node
+    >>> nb.root.left.left.left
+    Data=20
+    >>> is_subtree_lesser(nb.root.left, nb.root.data)
+    False
+    """
+
     if root is None:
         return True
 
-    if root.data <= value and is_subtree_lesser(root.left, value) and is_subtree_lesser(root, value):
+    if root.data <= value and is_subtree_lesser(root.left, root.data):
         return True
 
     return False
 
 
 def is_subtree_greater(root, value):
+    """
+    >>> from crazy_notes.bst import BinarySearchTree, Node, is_subtree_greater
+    >>> b = BinarySearchTree()
+    >>> b.insert(10)
+    True
+    >>> b.insert(11)
+    True
+    >>> b.insert(12)
+    True
+    >>> b.insert(13)
+    True
+    >>> b.insert(14)
+    True
+    >>> b.insert(15)
+    True
+    >>> is_subtree_greater(b.root.right, b.root.data)
+    True
+    >>> nb = BinarySearchTree()
+    >>> node = Node(10)
+    >>> nb.root = node
+    >>> node = Node(11)
+    >>> nb.root.right = node
+    >>> node = Node(12)
+    >>> nb.root.right.right = node
+    >>> node = Node(11)
+    >>> nb.root.right.right
+    Data=12
+    >>> nb.root.right.right.right = node
+    >>> nb.root.right.right.right
+    Data=11
+    >>> is_subtree_greater(nb.root.right, nb.root.data)
+    False
+    """
+
     if root is None:
         return True
 
-    if root.data > value and is_subtree_greater(root.left, value) and is_subtree_greater(root.right, value):
+    if root.data > value and is_subtree_greater(root.right, root.data):
         return True
 
     return False
 
 
 def is_binary_search_tree(bst):
-    root = bst.root
+    '''
+    >>> from crazy_notes.bst import BinarySearchTree, is_binary_search_tree, Node
+    >>> b = BinarySearchTree()
+    >>> b.add(15)
+    True
+    >>> b.add(10)
+    True
+    >>> b.add(8)
+    True
+    >>> b.add(12)
+    True
+    >>> b.add(17)
+    True
+    >>> is_binary_search_tree(b)
+    True
+    >>> nb = BinarySearchTree()
+    >>> node = Node(10)
+    >>> nb.root = node
+    >>> node = Node(15)
+    >>> nb.root.right = node
+    >>> node = Node(8)
+    >>> nb.root.left
+    >>> nb.root.left = node
+    >>> node = Node(10)
+    >>> nb.root.left.right = node
+    >>> is_binary_search_tree(nb)
+    True
+    >>> node = Node(20)
+    >>> nb.root.left
+    Data=8
+    >>> nb.root.left.right.left = node
+    >>> is_binary_search_tree(nb)
+    False
+    '''
+
+    if isinstance(bst, BinarySearchTree):
+        root = bst.root
+    else:
+        root = bst
+
     if not root:
         return True
 
     if is_subtree_lesser(root.left, root.data) \
-        and is_subtree_greater(root.right, root.value) \
-        and is_binary_search_tree(root.left) \
-        and is_binary_search_tree(root.right):
+            and is_subtree_greater(root.right, root.data) \
+            and is_binary_search_tree(root.left) \
+            and is_binary_search_tree(root.right):
         return True
 
     return False
@@ -398,5 +505,5 @@ def is_binary_search_tree(bst):
 
 if __name__ == '__main__':
     import doctest
-    doctest.testmod(verbose=True)
 
+    doctest.testmod(verbose=True)
