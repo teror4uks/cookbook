@@ -400,7 +400,7 @@ def is_subtree_lesser(root, value):
     if root is None:
         return True
 
-    if root.data <= value and is_subtree_lesser(root.left, root.data):
+    if root.data <= value and is_subtree_lesser(root.left, value) and is_subtree_lesser(root.right, value):
         return True
 
     return False
@@ -431,12 +431,12 @@ def is_subtree_greater(root, value):
     >>> nb.root.right = node
     >>> node = Node(12)
     >>> nb.root.right.right = node
-    >>> node = Node(11)
+    >>> node = Node(9)
     >>> nb.root.right.right
     Data=12
     >>> nb.root.right.right.right = node
     >>> nb.root.right.right.right
-    Data=11
+    Data=9
     >>> is_subtree_greater(nb.root.right, nb.root.data)
     False
     """
@@ -444,7 +444,7 @@ def is_subtree_greater(root, value):
     if root is None:
         return True
 
-    if root.data > value and is_subtree_greater(root.right, root.data):
+    if root.data > value and is_subtree_greater(root.right, value) and is_subtree_greater(root.left, value):
         return True
 
     return False
